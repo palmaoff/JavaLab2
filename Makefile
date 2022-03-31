@@ -1,5 +1,5 @@
 all:
-	@javac Main.java -d ./obj/
+	@javac ./src/Main.java -d ./obj/
 	@java -cp ./obj/ Main
 
 clean:
