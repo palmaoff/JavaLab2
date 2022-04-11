@@ -1,6 +1,4 @@
 all:
-	@javac ./src/Main.java -d ./obj/
-	@java -cp ./obj/ Main
-
-clean:
-	@del obj
+	@javac Main.java
+	@java Main
+	@del *.class
