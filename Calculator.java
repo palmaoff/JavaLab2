@@ -1,8 +1,15 @@
+import java.util.Stack;
+
 public class Calculator {
 
 	public static boolean IsValid(String str) {
+		boolean b = true;
 
-		return true;
+		// check all symbols
+
+		// check bracets
+
+		return b;
 	}
 
 	public static String RemoveWhiteSpaces(String str) {
@@ -11,20 +18,56 @@ public class Calculator {
 		return result;
 	}
 
-	public static String ToRPN(String str) {
+	public String ToRPN(String str) {
 		String result = "";
+		Stack<Character> stack = new Stack<>();
+		int priority;
 
-		// code here
+		for (int i = 0; i < str.length(); i++) {
+			priority = GetPriority(str.charAt(i));
+
+			if (priority == 0) {
+				result += str.charAt(i);
+			}
+			else if (priority == 1) {
+				stack.push(str.charAt(i));
+			}
+			else if (priority > 1) {
+				result += ' ';
+				while (!stack.empty()) {
+					if (GetPriority(stack.peek()) >= priority) {
+						result += stack.pop();
+					}
+					else {
+						break;
+					}
+				}
+				stack.push(str.charAt(i));
+			}
+			else if (priority == -1) {
+				result += ' ';
+
+				while (GetPriority(stack.peek()) != 1) {
+					result += stack.pop();
+				}
+
+				stack.pop();
+			}
+
+		}
+		
+		while (!stack.empty()) {
+			result += stack.pop();
+		}
 
 		return result;
 	}
 
-	public static double Calculate(String str) {
-
+	public double Calculate(String str) {
 		return 0;
 	}
 
-	private int SetPriority(char c) {
+	private static int GetPriority(char c) {
 		switch (c) {
 			case ('*'):
 				return 3;
