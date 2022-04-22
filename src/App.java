@@ -1,10 +1,7 @@
 import java.util.Scanner;
 
-public class Main {
-
-	public static void main(String[] args) {
-
-		Calculator c = new Calculator();
+public class App {
+    public static void main(String[] args) throws Exception {
 		Scanner in = new Scanner(System.in);
 
 		System.out.print("Input an expression: ");
@@ -12,13 +9,11 @@ public class Main {
 
 		in.close();
 
-		String rpn = c.ToRPN(str);
+		String rpn = Calculator.ToRPN(str);
 		if (rpn != "") {
-			System.out.println(c.Calculate(rpn));
+			System.out.println(Calculator.Calculate(rpn));
 		} else {
 			System.out.println("Expression not valid");
 		}
-
-	}
-
+    }
 }

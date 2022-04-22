@@ -2,6 +2,23 @@ import java.util.Stack;
 
 public class Calculator {
 
+	// for testing (maybe)
+	public static Double solve(String str) {
+		String rpn = ToRPN(str);
+
+		if (rpn != "") {
+			return Calculate(rpn);
+		}
+
+		return 0.0;
+	}
+
+	public static String RemoveWhiteSpaces(String str) {
+		String result = str.replace(" ", "");
+
+		return result;
+	}
+
 	public static boolean IsValid(String str) {
 		boolean b = true;
 		Stack<Character> stack = new Stack<>();
@@ -40,13 +57,26 @@ public class Calculator {
 		return b;
 	}
 
-	public static String RemoveWhiteSpaces(String str) {
-		String result = str.replace(" ", "");
-
-		return result;
+	private static int GetPriority(char c) {
+		switch (c) {
+			case ('*'):
+				return 3;
+			case ('/'):
+				return 3;
+			case ('+'):
+				return 2;
+			case ('-'):
+				return 2;
+			case ('('):
+				return 1;
+			case (')'):
+				return -1;
+			default:
+				return 0;
+		}
 	}
 
-	public String ToRPN(String str) {
+	public static String ToRPN(String str) {
 		String result = "";
 		Stack<Character> stack = new Stack<>();
 		int priority;
@@ -96,7 +126,7 @@ public class Calculator {
 		return result;
 	}
 
-	public double Calculate(String str) {
+	public static double Calculate(String str) {
 		String operand = new String();
 		Stack<Double> stack = new Stack<>();
 
@@ -123,25 +153,6 @@ public class Calculator {
 		}
 		
 		return stack.pop();
-	}
-
-	private static int GetPriority(char c) {
-		switch (c) {
-			case ('*'):
-				return 3;
-			case ('/'):
-				return 3;
-			case ('+'):
-				return 2;
-			case ('-'):
-				return 2;
-			case ('('):
-				return 1;
-			case (')'):
-				return -1;
-			default:
-				return 0;
-		}
 	}
 
 }
